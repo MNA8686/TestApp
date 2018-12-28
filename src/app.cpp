@@ -61,6 +61,8 @@ bool TestApp::OnCreate(void)
 	Window::SetTitle(u8"App Test Program");
 	Window::SetStyle(WindowStyle::Sizeable);
 	Window::SetMinimumSize(320, 240);
+	Window::SetSize(1280, 720);
+	Window::Centering();
 
 	//Singleton<AssetManager>::GetInstance()->SetArchivePath("asset.eq2", "equinox");
 

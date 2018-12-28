@@ -104,7 +104,7 @@
     <PostBuildEvent>
       <Command>copy "..\Equisetum2\lib\win32\dll\*" ".\test\"
 copy "..\Equisetum2\lib\win32\system.eq2" ".\test\"
-xcopy ".\resources\*" ".\test\" /S/E/i</Command>
+xcopy ".\resources\*" ".\test\" /S/E/i/Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -143,7 +143,7 @@ xcopy ".\resources\*" ".\test\" /S/E/i</Command>
     <PostBuildEvent>
       <Command>copy "..\Equisetum2\lib\win32\dll\*" ".\test\"
 copy "..\Equisetum2\lib\win32\system.eq2" ".\test\"
-xcopy ".\resources\*" ".\test\" /S/E/i</Command>
+xcopy ".\resources\*" ".\test\" /S/E/i/Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
