@@ -1,0 +1,27 @@
+#pragma once
+
+#include "Script.hpp"
+#include <cereal/types/base_class.hpp>
+
+class ScriptPlayer : public Script
+{
+public:
+	ScriptPlayer() = default;
+	virtual ~ScriptPlayer() = default;
+
+	virtual bool OnCreate() override;
+	virtual bool FixedUpdate() override;
+
+	template<class Archive>
+	void serialize(Archive & archive)
+	{
+		archive(cereal::base_class<Script>(this));
+	}
+
+	std::shared_ptr<SpriteRenderer> m_spriteRenderer;
+};
+
+#include <cereal/types/polymorphic.hpp>
+CEREAL_REGISTER_TYPE(ScriptPlayer);
+CEREAL_REGISTER_POLYMORPHIC_RELATION(Script, ScriptPlayer)
+

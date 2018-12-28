@@ -1,0 +1,10 @@
+{
+	"type" : "object",
+	"id" : "bullet",
+	"asset" :
+	{
+		"sprite": ["bullet_tama08", "bullet_tama16"],
+		"se" : ["eneshot"],
+		"script" : ["ScriptBullet"]
+	}
+}

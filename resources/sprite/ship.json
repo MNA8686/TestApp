@@ -1,0 +1,12 @@
+{
+	"type" : "sprite",
+	"id": "ship",
+	"textureid": "ship",
+	"atlas": [
+		{
+			"pos" : [0, 0],
+			"size" : [64, 64],
+			"pivot" : [0.5, 0.5]
+		}
+	]
+}

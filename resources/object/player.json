@@ -1,0 +1,10 @@
+{
+	"type" : "object",
+	"id" : "player",
+	"asset" :
+	{
+		"sprite": ["ship"],
+		"se" : ["ds_brush_snare"],
+		"script" : ["ScriptPlayer"]
+	}
+}

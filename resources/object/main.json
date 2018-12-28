@@ -1,0 +1,10 @@
+{
+	"type" : "object",
+	"id" : "main",
+	"asset" :
+	{
+		"bgm" : ["ontama_rpg_kurosujinkei"],
+		"sprite": ["space"],
+		"script" : ["ScriptMain"]
+	}
+}
