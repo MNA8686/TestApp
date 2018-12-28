@@ -47,6 +47,12 @@ echo errorlevel %errorlevel%
 exit /b %errorlevel%
 )
 
+copy doc\* %DEPLOYDIR%%APP_NAME%
+if not %errorlevel% == 0 (
+echo errorlevel %errorlevel%
+exit /b %errorlevel%
+)
+
 copy test\TestApp.exe %DEPLOYDIR%%APP_NAME%
 if not %errorlevel% == 0 (
 echo errorlevel %errorlevel%
