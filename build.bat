@@ -4,7 +4,8 @@ call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\Tools\VsMSBuil
 :MSBuild.exeÇÃÉpÉXÇê›íË
 set PATH=%PATH%;C:\Windows\Microsoft.NET\Framework\v4.0.30319\
 set DEPLOYDIR=deploy\
-set APP_NAME=TestApp_%date:~0,4%-%date:~5,2%-%date:~8,2%_%time:~0,2%-%time:~3,2%-%time:~6,2%
+set time2=%time: =0%
+set APP_NAME=TestApp_%date:~0,4%-%date:~5,2%-%date:~8,2%_%time2:~0,2%-%time2:~3,2%-%time2:~6,2%
 
 chcp 65001
 echo ==============================
