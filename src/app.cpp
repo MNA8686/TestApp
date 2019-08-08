@@ -3,11 +3,11 @@
 #include "Node.hpp"
 #include "Application.hpp"
 
-#include <cereal/cereal.hpp>
-#include <cereal/archives/json.hpp>
+//#include <cereal/cereal.hpp>
+//#include <cereal/archives/json.hpp>
 
-#include <cereal/types/vector.hpp>
-#include <cereal/types/memory.hpp>
+//#include <cereal/types/vector.hpp>
+//#include <cereal/types/memory.hpp>
 
 using namespace Equisetum2;
 
@@ -17,12 +17,14 @@ public:
 	TestApp() = default;
 	~TestApp() = default;
 
+#if 0
 	template<class Archive>
 	void serialize(Archive & archive)
 	{
 		// test
 		archive(CEREAL_NVP(m_rootObject));
 	}
+#endif
 	
 	friend Singleton<TestApp>;	// シングルトンからインスタンスを作成してもらえるようにする
 
@@ -38,7 +40,8 @@ private:
 	virtual String GetApplicationName(void);
 
 	// test
-	std::shared_ptr<Object> m_rootObject;
+	//std::shared_ptr<Object> m_rootObject;
+	NodeID m_rootObject = -1;
 	std::shared_ptr<Texture> m_targetTexture;
 	std::shared_ptr<Sprite> m_targetSprite;
 	std::shared_ptr<RenderObject> m_targetRenderObject;
@@ -56,8 +59,13 @@ String TestApp::GetApplicationName(void)
 	return "TestApp";
 }
 
+void heap_test();
+
 bool TestApp::OnCreate(void)
 {
+
+	heap_test();
+
 	Window::SetTitle(u8"App Test Program");
 	Window::SetStyle(WindowStyle::Sizeable);
 	Window::SetMinimumSize(320, 240);
@@ -80,7 +88,7 @@ bool TestApp::OnInit(void)
 
 	// ルートオブジェクト作成
 	m_rootObject = Object::Create("main");
-	if (!m_rootObject)
+	if (m_rootObject < 0)
 	{
 		return false;
 	}
@@ -120,7 +128,8 @@ void TestApp::OnQuit(void)
 	m_targetRenderObject = nullptr;
 	m_targetSprite = nullptr;
 	m_targetTexture = nullptr;
-	m_rootObject = nullptr;
+	//m_rootObject = nullptr;
+	m_rootObject = -1;
 }
 
 //#include <iostream>
@@ -174,9 +183,10 @@ bool TestApp::OnDraw(void)
 
 		renderer->Clear({ 0, 128, 255, 0 });
 
-		if (m_rootObject)
+		//if (m_rootObject)
 		{
-			m_rootObject->OnDraw(renderer);
+			auto obj = Object::GetObjectByID(m_rootObject);
+			obj.OnDraw(renderer);
 		}
 
 		renderer->Render();

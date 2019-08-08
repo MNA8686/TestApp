@@ -18,10 +18,9 @@ std::shared_ptr<SpriteRenderer> ScriptBullet::RegisterSpriteRenderer()
 	auto renderer = Script::GetRenderer();
 	auto spriteRenderer = renderer->CreateRenderObject<SpriteRenderer>();
 
-	if (auto owner = GetOwner())
-	{
-		owner->AddRenderObject(spriteRenderer);
-	}
+	auto ownerID = GetOwner();
+	auto owner = Object::GetObjectByID(ownerID);
+	owner.AddRenderObject(spriteRenderer);
 
 	return spriteRenderer;
 }
@@ -31,10 +30,9 @@ std::shared_ptr<LineRenderer> ScriptBullet::RegisterLineRenderer()
 	auto renderer = Script::GetRenderer();
 	auto lineRenderer = renderer->CreateRenderObject<LineRenderer>();
 
-	if (auto owner = GetOwner())
-	{
-		owner->AddRenderObject(lineRenderer);
-	}
+	auto ownerID = GetOwner();
+	auto owner = Object::GetObjectByID(ownerID);
+	owner.AddRenderObject(lineRenderer);
 
 	return lineRenderer;
 }
@@ -44,10 +42,9 @@ std::shared_ptr<RectRenderer> ScriptBullet::RegisterRectRenderer()
 	auto renderer = Script::GetRenderer();
 	auto castRenderer = renderer->CreateRenderObject<RectRenderer>();
 
-	if (auto owner = GetOwner())
-	{
-		owner->AddRenderObject(castRenderer);
-	}
+	auto ownerID = GetOwner();
+	auto owner = Object::GetObjectByID(ownerID);
+	owner.AddRenderObject(castRenderer);
 
 	return castRenderer;
 }
@@ -57,10 +54,9 @@ std::shared_ptr<CircleRenderer> ScriptBullet::RegisterCircleRenderer()
 	auto renderer = Script::GetRenderer();
 	auto circleRenderer = renderer->CreateRenderObject<CircleRenderer>();
 
-	if (auto owner = GetOwner())
-	{
-		owner->AddRenderObject(circleRenderer);
-	}
+	auto ownerID = GetOwner();
+	auto owner = Object::GetObjectByID(ownerID);
+	owner.AddRenderObject(circleRenderer);
 
 	return circleRenderer;
 }
@@ -70,10 +66,9 @@ std::shared_ptr<TextRenderer> ScriptBullet::RegisterTextRenderer()
 	auto renderer = Script::GetRenderer();
 	auto textRenderer = renderer->CreateRenderObject<TextRenderer>();
 
-	if (auto owner = GetOwner())
-	{
-		owner->AddRenderObject(textRenderer);
-	}
+	auto ownerID = GetOwner();
+	auto owner = Object::GetObjectByID(ownerID);
+	owner.AddRenderObject(textRenderer);
 
 	return textRenderer;
 }
@@ -84,22 +79,23 @@ bool ScriptBullet::OnCreate()
 
 	if (auto spriteRenderer = RegisterSpriteRenderer())
 	{
-		if (auto owner = GetOwner())
+		auto ownerID = GetOwner();
+		auto owner = Object::GetObjectByID(ownerID);
 		{
-			auto asset = owner->GetAsset();
+			auto asset = owner.GetAsset();
 			int kind = rand() % 2;
 			m_sprite = asset.m_sprite[kind];
 			spriteRenderer->SetSprite(m_sprite).SetLayer(1 - kind).SetBlendMode(BlendMode::Blend);
 
 			{
-				auto pos = owner->GetPos();
+				auto pos = owner.GetPos();
 				spriteRenderer->SetPos({ pos.x.GetInt(), pos.y.GetInt() });// .Calculation();
 			}
 
 			m_spriteRenderer = spriteRenderer;
 			m_spriteRenderer->SetLayer(10);
 
-			owner->SetVisible(false);
+			owner.SetVisible(false);
 		}
 	}
 
@@ -168,10 +164,12 @@ void ScriptBullet::SetBullet(FixedDec x, FixedDec y, int32_t angle, FixedDec spe
 	m_angle = rand() % 360;
 	m_speed = 500 + (rand() % 400);
 
-	if (auto owner = GetOwner())
+	auto ownerID = GetOwner();
+	auto owner = Object::GetObjectByID(ownerID);
+
 	{
-		owner->SetPos({ rand() % 640, rand() % 480 });
-		owner->SetVisible(true);
+		owner.SetPos({ rand() % 640, rand() % 480 });
+		owner.SetVisible(true);
 		m_spriteRenderer->SetVisible(true);
 	}
 }
@@ -190,9 +188,11 @@ bool ScriptBullet::FixedUpdate()
 	}
 #endif
 
-	if (auto owner = GetOwner())
+	auto ownerID = GetOwner();
+	auto owner = Object::GetObjectByID(ownerID);
+
 	{
-		if (owner->IsVisible())
+		if (owner.IsVisible())
 		{
 			static int visiCount = 0;
 
@@ -269,14 +269,14 @@ bool ScriptBullet::FixedUpdate()
 			if (1)
 			{
 				auto rag = m_angle * 3.14159265358979323846f / 180.f;
-				auto pos = owner->GetPos();
+				auto pos = owner.GetPos();
 				Point_t<FixedDec> new_pos;
 				new_pos.x.SetRaw(pos.x.GetRaw() + m_speed * cos(rag));
 				new_pos.y.SetRaw(pos.y.GetRaw() + m_speed * -sin(rag));
-				owner->SetPos(new_pos);
+				owner.SetPos(new_pos);
 
 				{
-					auto pos = owner->GetPos();
+					auto pos = owner.GetPos();
 					m_spriteRenderer->SetPos({ pos.x.GetInt(), pos.y.GetInt() });// .Calculation();
 
 #if 0
@@ -305,7 +305,7 @@ bool ScriptBullet::FixedUpdate()
 					new_pos.y.GetInt() < -20 || new_pos.y.GetInt() > 480 + 20)
 				{
 					//			owner->Destroy();
-					owner->SetVisible(false);
+					owner.SetVisible(false);
 					m_spriteRenderer->SetVisible(false);
 				}
 			}

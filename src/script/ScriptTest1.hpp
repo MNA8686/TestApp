@@ -2,7 +2,7 @@
 #define _EQSCRIPTTEST1_H_
 
 #include "Script.hpp"
-#include <cereal/types/base_class.hpp>
+//#include <cereal/types/base_class.hpp>
 
 #include "ScriptTest2.hpp"
 
@@ -14,6 +14,7 @@ public:
 
 	virtual bool OnCreate() override;
 
+#if 0
 	template<class Archive>
 	void serialize(Archive & archive)
 	{
@@ -21,11 +22,12 @@ public:
 
 		archive(CEREAL_NVP(m_test1));
 	}
+#endif
 	int m_test1 = 0;
 };
 
-#include <cereal/types/polymorphic.hpp>
-CEREAL_REGISTER_TYPE(ScriptTest1);
-CEREAL_REGISTER_POLYMORPHIC_RELATION(Script, ScriptTest1)
+//#include <cereal/types/polymorphic.hpp>
+//CEREAL_REGISTER_TYPE(ScriptTest1);
+//CEREAL_REGISTER_POLYMORPHIC_RELATION(Script, ScriptTest1)
 
 #endif
