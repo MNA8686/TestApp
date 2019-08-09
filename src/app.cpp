@@ -185,7 +185,7 @@ bool TestApp::OnDraw(void)
 
 		//if (m_rootObject)
 		{
-			auto obj = Object::GetObjectByID(m_rootObject);
+			auto& obj = Object::GetObjectByID(m_rootObject);
 			obj.OnDraw(renderer);
 		}
 

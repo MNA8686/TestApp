@@ -55,8 +55,6 @@ bool ScriptMain::OnCreate()
 		{
 			auto& obj = Object::GetObjectByID(objID);
 			obj.SetParentID(owner.GetNodeID());
-
-	Object::GetObjectByID(objID);
 		}
 
 		// BGMを再生開始

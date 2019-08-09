@@ -3,7 +3,7 @@
 bool ScriptPlayer::OnCreate()
 {
 	auto ownerID = GetOwner();
-	auto owner = Object::GetObjectByID(ownerID);
+	auto& owner = Object::GetObjectByID(ownerID);
 
 	{
 		if (auto spriteRenderer = GetRenderer()->CreateRenderObject<SpriteRenderer>())
@@ -30,7 +30,7 @@ bool ScriptPlayer::OnCreate()
 bool ScriptPlayer::FixedUpdate()
 {
 	auto ownerID = GetOwner();
-	auto owner = Object::GetObjectByID(ownerID);
+	auto& owner = Object::GetObjectByID(ownerID);
 
 	{
 		auto joy = Joystick::CreateByIndex(0);
