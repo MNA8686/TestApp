@@ -41,7 +41,7 @@ private:
 
 	// test
 	//std::shared_ptr<Object> m_rootObject;
-	NodeID m_rootObject = -1;
+	NodeHandler m_rootObject;
 	std::shared_ptr<Texture> m_targetTexture;
 	std::shared_ptr<Sprite> m_targetSprite;
 	std::shared_ptr<RenderObject> m_targetRenderObject;
@@ -88,7 +88,7 @@ bool TestApp::OnInit(void)
 
 	// ルートオブジェクト作成
 	m_rootObject = Object::Create("main");
-	if (m_rootObject < 0)
+	if (m_rootObject.id < 0)
 	{
 		return false;
 	}
@@ -129,7 +129,7 @@ void TestApp::OnQuit(void)
 	m_targetSprite = nullptr;
 	m_targetTexture = nullptr;
 	//m_rootObject = nullptr;
-	m_rootObject = -1;
+	m_rootObject = {};
 }
 
 //#include <iostream>
@@ -185,8 +185,8 @@ bool TestApp::OnDraw(void)
 
 		//if (m_rootObject)
 		{
-			auto& obj = Object::GetObjectByID(m_rootObject);
-			obj.OnDraw(renderer);
+			auto* obj = Object::GetObjectByHandler(m_rootObject);
+			obj->OnDraw(renderer);
 		}
 
 		renderer->Render();

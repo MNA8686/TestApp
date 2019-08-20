@@ -3,22 +3,22 @@
 bool ScriptPlayer::OnCreate()
 {
 	auto ownerID = GetOwner();
-	auto& owner = Object::GetObjectByID(ownerID);
+	auto owner = Object::GetObjectByHandler(ownerID);
 
 	{
 		if (auto spriteRenderer = GetRenderer()->CreateRenderObject<SpriteRenderer>())
 		{
-			owner.SetPos({ 448 / 2, 480 / 4 * 3 });
+			owner->SetPos({ 448 / 2, 480 / 4 * 3 });
 
-			auto& sprite = owner.GetAsset().m_sprite[0];
+			auto& sprite = owner->GetAsset().m_sprite[0];
 
 			spriteRenderer->SetSprite(sprite).
 				SetLayer(2).
 				SetBlendMode(BlendMode::Blend).
-				SetPos({owner.GetPos().x.GetInt(), owner.GetPos().y.GetInt()});
+				SetPos({owner->GetPos().x.GetInt(), owner->GetPos().y.GetInt()});
 
-			owner.SetVisible(true);
-			owner.AddRenderObject(spriteRenderer);
+			owner->SetVisible(true);
+			owner->AddRenderObject(spriteRenderer);
 
 			m_spriteRenderer = spriteRenderer;
 		}
@@ -30,12 +30,12 @@ bool ScriptPlayer::OnCreate()
 bool ScriptPlayer::FixedUpdate()
 {
 	auto ownerID = GetOwner();
-	auto& owner = Object::GetObjectByID(ownerID);
+	auto owner = Object::GetObjectByHandler(ownerID);
 
 	{
 		auto joy = Joystick::CreateByIndex(0);
 
-		Point_t<FixedDec> point = owner.GetPos();
+		Point_t<FixedDec> point = owner->GetPos();
 
 		const FixedDec speed = 6;
 		const int16_t threthold = 10000;
@@ -81,7 +81,7 @@ bool ScriptPlayer::FixedUpdate()
 			point.y = 480 - 32;
 		}
 
-		owner.SetPos(point);
+		owner->SetPos(point);
 
 		m_spriteRenderer->SetPos({ point.x.GetInt(), point.y.GetInt() });
 	}

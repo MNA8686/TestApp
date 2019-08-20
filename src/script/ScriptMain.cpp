@@ -5,13 +5,13 @@ bool ScriptMain::OnCreate()
 	Logger::OutputDebug("ScriptMain::OnCreate");
 
 	auto ownerID = GetOwner();
-	auto& owner = Object::GetObjectByID(ownerID);
+	auto owner = Object::GetObjectByHandler(ownerID);
 
 	{
 		// 背景を作る
 		if (auto spriteRenderer = GetRenderer()->CreateRenderObject<SpriteRenderer>())
 		{
-			auto& sprite = owner.GetAsset().m_sprite[0];
+			auto& sprite = owner->GetAsset().m_sprite[0];
 
 			spriteRenderer->SetSprite(sprite).
 				SetLayer(0).
@@ -19,8 +19,8 @@ bool ScriptMain::OnCreate()
 				SetPos({ 448 / 2, 480 / 2 }).
 				SetScale(1.5f, 1.5f);
 
-			owner.SetVisible(true);
-			owner.AddRenderObject(spriteRenderer);
+			owner->SetVisible(true);
+			owner->AddRenderObject(spriteRenderer);
 		}
 
 		// テキストを作る
@@ -45,21 +45,20 @@ bool ScriptMain::OnCreate()
 				textRenderer->SetLayer(10);
 
 				// レンダーキューに追加
-				owner.AddRenderObject(textRenderer);
+				owner->AddRenderObject(textRenderer);
 			}
 		}
 
 		// 自機を作る
-		auto objID = Object::Create("player");
-		if (objID >= 0)
+		auto objHandler = Object::Create("player");
+		if(auto* obj = Object::GetObjectByHandler(objHandler))
 		{
-			auto& obj = Object::GetObjectByID(objID);
-			obj.SetParentID(owner.GetNodeID());
+			obj->SetParentHandler(owner->GetNodeHandler());
 		}
 
 		// BGMを再生開始
-		owner.GetAsset().m_bgm[0]->SetVolume(0.5f);
-		owner.GetAsset().m_bgm[0]->Play(true);
+		owner->GetAsset().m_bgm[0]->SetVolume(0.5f);
+		owner->GetAsset().m_bgm[0]->Play(true);
 	}
 
 	return true;
