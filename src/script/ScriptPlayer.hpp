@@ -23,7 +23,3 @@ public:
 	std::shared_ptr<SpriteRenderer> m_spriteRenderer;
 };
 
-//#include <cereal/types/polymorphic.hpp>
-//CEREAL_REGISTER_TYPE(ScriptPlayer);
-//CEREAL_REGISTER_POLYMORPHIC_RELATION(Script, ScriptPlayer)
-

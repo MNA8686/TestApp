@@ -11,7 +11,7 @@ bool ScriptMain::OnCreate()
 		// 背景を作る
 		if (auto spriteRenderer = GetRenderer()->CreateRenderObject<SpriteRenderer>())
 		{
-			auto& sprite = owner->GetAsset().m_sprite[0];
+			auto& sprite = owner->GetAsset()->m_sprite[0];
 
 			spriteRenderer->SetSprite(sprite).
 				SetLayer(0).
@@ -57,8 +57,8 @@ bool ScriptMain::OnCreate()
 		}
 
 		// BGMを再生開始
-		owner->GetAsset().m_bgm[0]->SetVolume(0.5f);
-		owner->GetAsset().m_bgm[0]->Play(true);
+		owner->GetAsset()->m_bgm[0]->SetVolume(0.5f);
+		owner->GetAsset()->m_bgm[0]->Play(true);
 	}
 
 	return true;

@@ -82,9 +82,9 @@ bool ScriptBullet::OnCreate()
 		auto ownerID = GetOwner();
 		auto owner = Object::GetObjectByHandler(ownerID);
 		{
-			auto& asset = owner->GetAsset();
+			auto asset = owner->GetAsset();
 			int kind = rand() % 2;
-			m_sprite = asset.m_sprite[kind];
+			m_sprite = asset->m_sprite[kind];
 			spriteRenderer->SetSprite(m_sprite).SetLayer(1 - kind).SetBlendMode(BlendMode::Blend);
 
 			{

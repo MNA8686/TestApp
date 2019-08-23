@@ -5,23 +5,21 @@ bool ScriptPlayer::OnCreate()
 	auto ownerID = GetOwner();
 	auto owner = Object::GetObjectByHandler(ownerID);
 
+	if (auto spriteRenderer = GetRenderer()->CreateRenderObject<SpriteRenderer>())
 	{
-		if (auto spriteRenderer = GetRenderer()->CreateRenderObject<SpriteRenderer>())
-		{
-			owner->SetPos({ 448 / 2, 480 / 4 * 3 });
+		owner->SetPos({ 448 / 2, 480 / 4 * 3 });
 
-			auto& sprite = owner->GetAsset().m_sprite[0];
+		auto& sprite = owner->GetAsset()->m_sprite[0];
 
-			spriteRenderer->SetSprite(sprite).
-				SetLayer(2).
-				SetBlendMode(BlendMode::Blend).
-				SetPos({owner->GetPos().x.GetInt(), owner->GetPos().y.GetInt()});
+		spriteRenderer->SetSprite(sprite).
+			SetLayer(2).
+			SetBlendMode(BlendMode::Blend).
+			SetPos({owner->GetPos().x.GetInt(), owner->GetPos().y.GetInt()});
 
-			owner->SetVisible(true);
-			owner->AddRenderObject(spriteRenderer);
+		owner->SetVisible(true);
+		owner->AddRenderObject(spriteRenderer);
 
-			m_spriteRenderer = spriteRenderer;
-		}
+		m_spriteRenderer = spriteRenderer;
 	}
 
 	return true;
