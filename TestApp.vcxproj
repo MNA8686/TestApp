@@ -169,11 +169,8 @@ xcopy ".\resources\*" ".\test\" /S/E/i/Y</Command>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Use</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="src\script\ScriptBullet.cpp" />
-    <ClCompile Include="src\script\ScriptDef.cpp" />
     <ClCompile Include="src\script\ScriptMain.cpp" />
     <ClCompile Include="src\script\ScriptPlayer.cpp" />
-    <ClCompile Include="src\script\ScriptTest1.cpp" />
-    <ClCompile Include="src\script\ScriptTest2.cpp" />
     <ClCompile Include="src\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
@@ -183,8 +180,6 @@ xcopy ".\resources\*" ".\test\" /S/E/i/Y</Command>
     <ClInclude Include="src\script\ScriptBullet.hpp" />
     <ClInclude Include="src\script\ScriptMain.hpp" />
     <ClInclude Include="src\script\ScriptPlayer.hpp" />
-    <ClInclude Include="src\script\ScriptTest1.hpp" />
-    <ClInclude Include="src\script\ScriptTest2.hpp" />
     <ClInclude Include="src\stdafx.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

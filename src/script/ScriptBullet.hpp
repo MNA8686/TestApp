@@ -1,6 +1,7 @@
 #if !defined(_EQSCRIPTBULLET_H_)
 #define _EQSCRIPTBULLET_H_
 
+#if 0
 #include "Script.hpp"
 //#include <cereal/types/base_class.hpp>
 
@@ -53,5 +54,6 @@ public:
 //#include <cereal/types/polymorphic.hpp>
 //CEREAL_REGISTER_TYPE(ScriptBullet);
 //CEREAL_REGISTER_POLYMORPHIC_RELATION(Script, ScriptBullet)
+#endif
 
 #endif

@@ -1,4 +1,5 @@
-﻿
+﻿#if 0
+
 #include "ScriptBullet.hpp"
 
 bool ScriptBullet::m_shotSound = false;
@@ -315,3 +316,4 @@ bool ScriptBullet::FixedUpdate()
 	return true;
 }
 
+#endif

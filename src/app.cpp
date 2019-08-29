@@ -3,12 +3,6 @@
 #include "Node.hpp"
 #include "Application.hpp"
 
-//#include <cereal/cereal.hpp>
-//#include <cereal/archives/json.hpp>
-
-//#include <cereal/types/vector.hpp>
-//#include <cereal/types/memory.hpp>
-
 using namespace Equisetum2;
 
 class TestApp : public Application
@@ -17,15 +11,6 @@ public:
 	TestApp() = default;
 	~TestApp() = default;
 
-#if 0
-	template<class Archive>
-	void serialize(Archive & archive)
-	{
-		// test
-		archive(CEREAL_NVP(m_rootObject));
-	}
-#endif
-	
 	friend Singleton<TestApp>;	// シングルトンからインスタンスを作成してもらえるようにする
 
 private:
@@ -40,7 +25,6 @@ private:
 	virtual String GetApplicationName(void);
 
 	// test
-	//std::shared_ptr<Object> m_rootObject;
 	NodeHandler m_rootObject;
 	std::shared_ptr<Texture> m_targetTexture;
 	std::shared_ptr<Sprite> m_targetSprite;
@@ -77,14 +61,12 @@ bool TestApp::OnCreate(void)
 	return true;
 }
 
-extern const std::vector<stScriptTbl>& GetScriptTbl();
 bool TestApp::OnInit(void)
 {
 	auto renderer = GetRenderer();
 
 	// スクリプト初期化
-	Script::SetScriptTbl(GetScriptTbl());
-	Script::m_renderer = renderer;
+	ScriptBase::m_renderer = renderer;
 
 	// ルートオブジェクト作成
 	m_rootObject = Object::Create("main");
@@ -120,6 +102,8 @@ bool TestApp::OnInit(void)
 		}
 	}
 
+	Node<Object>::Dump();
+	
 	return true;
 }
 
@@ -128,12 +112,8 @@ void TestApp::OnQuit(void)
 	m_targetRenderObject = nullptr;
 	m_targetSprite = nullptr;
 	m_targetTexture = nullptr;
-	//m_rootObject = nullptr;
 	m_rootObject = {};
 }
-
-//#include <iostream>
-//#include <fstream>
 
 bool TestApp::OnUpdate(void)
 {
