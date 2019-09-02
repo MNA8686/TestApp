@@ -2,6 +2,7 @@
 #include "Object.hpp"
 #include "Node.hpp"
 #include "Application.hpp"
+#include <fstream>
 
 using namespace Equisetum2;
 
@@ -118,6 +119,29 @@ void TestApp::OnQuit(void)
 bool TestApp::OnUpdate(void)
 {
 	static bool pause = false;
+
+	if (KB::KeyL.IsDown())
+	{
+		//Node<Object>::DestroyThemAll();
+
+		std::ifstream ifs(Path::GetFullPath("out.json").c_str());
+		if (ifs)
+		{
+			cereal::JSONInputArchive i_archive(ifs);
+			Singleton<ResourceMapper>::GetInstance()->load(i_archive);
+
+			Object::m_dirty = true;
+		}
+	}
+	else if (KB::KeyS.IsDown())
+	{
+		std::ofstream ofs(Path::GetFullPath("out.json").c_str());
+		if (ofs)
+		{
+			cereal::JSONOutputArchive o_archive(ofs);
+			Singleton<ResourceMapper>::GetInstance()->save(o_archive);
+		}
+	}
 
 	// フルスクリーン切り替え
 	if (KB::KeyF.IsDown())
