@@ -26,7 +26,7 @@ private:
 	virtual String GetApplicationName(void);
 
 	// test
-	NodeHandler m_rootObject;
+	//NodeHandler m_rootObject;
 	std::shared_ptr<Texture> m_targetTexture;
 	std::shared_ptr<Sprite> m_targetSprite;
 	std::shared_ptr<RenderObject> m_targetRenderObject;
@@ -69,12 +69,14 @@ bool TestApp::OnInit(void)
 	// スクリプト初期化
 	ScriptBase::m_renderer = renderer;
 
+#if 0
 	// ルートオブジェクト作成
-	m_rootObject = Object::Create("main");
-	if (m_rootObject.id < 0)
+	auto rootObject = Object::Create("main");
+	if (rootObject.id < 0)
 	{
 		return false;
 	}
+#endif
 
 	// レンダリング用テクスチャを作成する
 	Size windowsSize = Window::Size();
@@ -113,16 +115,17 @@ void TestApp::OnQuit(void)
 	m_targetRenderObject = nullptr;
 	m_targetSprite = nullptr;
 	m_targetTexture = nullptr;
-	m_rootObject = {};
+	//m_rootObject = {};
 }
 
 bool TestApp::OnUpdate(void)
 {
 	static bool pause = false;
 
+#if 0
 	if (KB::KeyL.IsDown())
 	{
-		//Node<Object>::DestroyThemAll();
+		Singleton<ResourceMapper>::GetInstance()->Reset();
 
 		std::ifstream ifs(Path::GetFullPath("out.json").c_str());
 		if (ifs)
@@ -135,6 +138,10 @@ bool TestApp::OnUpdate(void)
 	}
 	else if (KB::KeyS.IsDown())
 	{
+		auto out = FileStream::NewFileFromPath(Path::GetFullPath("mem.bin"));
+
+		Singleton<EqHeap>::GetInstance()->Save(out, );
+
 		std::ofstream ofs(Path::GetFullPath("out.json").c_str());
 		if (ofs)
 		{
@@ -142,6 +149,7 @@ bool TestApp::OnUpdate(void)
 			Singleton<ResourceMapper>::GetInstance()->save(o_archive);
 		}
 	}
+#endif
 
 	// フルスクリーン切り替え
 	if (KB::KeyF.IsDown())
@@ -187,10 +195,9 @@ bool TestApp::OnDraw(void)
 
 		renderer->Clear({ 0, 128, 255, 0 });
 
-		//if (m_rootObject)
+		if (auto root = Object::GetRoot())
 		{
-			auto* obj = Object::GetObjectByHandler(m_rootObject);
-			obj->OnDraw(renderer);
+			root->OnDraw(renderer);
 		}
 
 		renderer->Render();
