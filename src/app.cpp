@@ -69,7 +69,7 @@ bool TestApp::OnInit(void)
 	// スクリプト初期化
 	ScriptBase::m_renderer = renderer;
 
-#if 0
+#if 1
 	// ルートオブジェクト作成
 	auto rootObject = Object::Create("main");
 	if (rootObject.id < 0)

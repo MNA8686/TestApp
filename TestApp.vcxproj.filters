@@ -33,6 +33,9 @@
     <ClCompile Include="src\script\ScriptPlayer.cpp">
       <Filter>ソース ファイル\Script</Filter>
     </ClCompile>
+    <ClCompile Include="src\script\ScriptOption.cpp">
+      <Filter>ソース ファイル\Script</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\script\ScriptMain.hpp">
@@ -45,6 +48,9 @@
       <Filter>ソース ファイル</Filter>
     </ClInclude>
     <ClInclude Include="src\script\ScriptPlayer.hpp">
+      <Filter>ソース ファイル\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="src\script\ScriptOption.hpp">
       <Filter>ソース ファイル\Script</Filter>
     </ClInclude>
   </ItemGroup>

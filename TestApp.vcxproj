@@ -170,6 +170,7 @@ xcopy ".\resources\*" ".\test\" /S/E/i/Y</Command>
     </ClCompile>
     <ClCompile Include="src\script\ScriptBullet.cpp" />
     <ClCompile Include="src\script\ScriptMain.cpp" />
+    <ClCompile Include="src\script\ScriptOption.cpp" />
     <ClCompile Include="src\script\ScriptPlayer.cpp" />
     <ClCompile Include="src\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -179,6 +180,7 @@ xcopy ".\resources\*" ".\test\" /S/E/i/Y</Command>
   <ItemGroup>
     <ClInclude Include="src\script\ScriptBullet.hpp" />
     <ClInclude Include="src\script\ScriptMain.hpp" />
+    <ClInclude Include="src\script\ScriptOption.hpp" />
     <ClInclude Include="src\script\ScriptPlayer.hpp" />
     <ClInclude Include="src\stdafx.h" />
   </ItemGroup>

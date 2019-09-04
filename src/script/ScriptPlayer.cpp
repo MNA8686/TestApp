@@ -11,12 +11,30 @@ bool ScriptPlayer::OnCreate(Object* owner)
 		spriteRenderer->SetSprite(sprite).
 			SetLayer(2).
 			SetBlendMode(BlendMode::Blend).
-			SetPos({owner->GetPos().x.GetInt(), owner->GetPos().y.GetInt()});
+			SetPos({ owner->GetPos().x.GetInt(), owner->GetPos().y.GetInt() });
 
 		owner->SetVisible(true);
-		owner->AddRenderObject(spriteRenderer);
+		m_spriteRenderer = owner->AddRenderObject(spriteRenderer);
+	}
 
-		m_spriteRenderer = spriteRenderer;
+	int32_t x = -48;
+	// オプションを作る
+	for (int i = 0; i < 2; i++)
+	{
+		auto objHandler = owner->CreateChild("option");
+		if (auto option = owner->GetObjectByHandler(objHandler))
+		{
+			option->SetLocalPos({ x, 32 });
+			x *= -1;
+
+#if 0
+			auto objHandler = option->CreateChild("option");
+			if (auto option2 = owner->GetObjectByHandler(objHandler))
+			{
+				option2->SetLocalPos({ 16, 32 });
+			}
+#endif
+		}
 	}
 
 	return true;
@@ -74,7 +92,12 @@ bool ScriptPlayer::FixedUpdate(Object* owner)
 
 	owner->SetPos(point);
 
-	m_spriteRenderer->SetPos({ point.x.GetInt(), point.y.GetInt() });
+	if (auto renderObject = owner->GetRenderObject(m_spriteRenderer))
+	{
+		auto spriteRenderer = static_cast<SpriteRenderer*>(renderObject);
+
+		spriteRenderer->SetPos({ point.x.GetInt(), point.y.GetInt() });
+	}
 
 	return true;
 }

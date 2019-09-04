@@ -47,9 +47,9 @@ bool ScriptMain::OnCreate(Object* owner)
 	}
 #endif
 
-#if 0
 	// 自機を作る
-	auto objHandler = Object::Create("player");
+	auto objHandler = owner->CreateChild("player");
+#if 0
 	if(auto* obj = Object::GetObjectByHandler(objHandler))
 	{
 		obj->SetParentHandler(owner->GetNodeHandler());
@@ -57,8 +57,8 @@ bool ScriptMain::OnCreate(Object* owner)
 #endif
 
 	// BGMを再生開始
-	owner->GetAsset()->m_bgm[0]->SetVolume(0.5f);
-	owner->GetAsset()->m_bgm[0]->Play(true);
+//	owner->GetAsset()->m_bgm[0]->SetVolume(0.5f);
+//	owner->GetAsset()->m_bgm[0]->Play(true);
 
 	return true;
 }
