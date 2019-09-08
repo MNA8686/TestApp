@@ -10,6 +10,9 @@ public:
 
 	bool OnCreate(Object* owner);
 	bool FixedUpdate(Object* owner);
+
+private:
+	SpriteRendererContainer m_spriteRenderer;
 };
 
 EQ_SCRIPT_REGISTER(ScriptMain);

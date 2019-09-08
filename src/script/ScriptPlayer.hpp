@@ -12,7 +12,7 @@ public:
 	bool FixedUpdate(Object* owner);
 
 private:
-	int32_t m_spriteRenderer = -1;
+	SpriteRendererContainer m_spriteRenderer;
 };
 
 EQ_SCRIPT_REGISTER(ScriptPlayer);

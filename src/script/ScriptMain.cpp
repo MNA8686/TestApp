@@ -4,19 +4,22 @@ bool ScriptMain::OnCreate(Object* owner)
 {
 	Logger::OutputDebug("ScriptMain::OnCreate");
 
+	if (!m_spriteRenderer.BindObject(owner))
+	{
+		return false;
+	}
+
+	owner->SetVisible(true);
+
 	// 背景を作る
-	if (auto spriteRenderer = GetRenderer()->CreateRenderObject<SpriteRenderer>())
 	{
 		auto& sprite = owner->GetAsset()->m_sprite[0];
 
-		spriteRenderer->SetSprite(sprite).
+		m_spriteRenderer->SetSprite(sprite).
 			SetLayer(0).
 			SetBlendMode(BlendMode::Blend).
 			SetPos({ 448 / 2, 480 / 2 }).
 			SetScale(1.5f, 1.5f);
-
-		owner->SetVisible(true);
-		owner->AddRenderObject(spriteRenderer);
 	}
 
 #if 0
@@ -49,12 +52,6 @@ bool ScriptMain::OnCreate(Object* owner)
 
 	// 自機を作る
 	auto objHandler = owner->CreateChild("player");
-#if 0
-	if(auto* obj = Object::GetObjectByHandler(objHandler))
-	{
-		obj->SetParentHandler(owner->GetNodeHandler());
-	}
-#endif
 
 	// BGMを再生開始
 //	owner->GetAsset()->m_bgm[0]->SetVolume(0.5f);

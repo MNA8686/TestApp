@@ -2,20 +2,20 @@
 
 bool ScriptPlayer::OnCreate(Object* owner)
 {
-	if (auto spriteRenderer = GetRenderer()->CreateRenderObject<SpriteRenderer>())
+	if (!m_spriteRenderer.BindObject(owner))
 	{
-		owner->SetPos({ 448 / 2, 480 / 4 * 3 });
-
-		auto& sprite = owner->GetAsset()->m_sprite[0];
-
-		spriteRenderer->SetSprite(sprite).
-			SetLayer(2).
-			SetBlendMode(BlendMode::Blend).
-			SetPos({ owner->GetPos().x.GetInt(), owner->GetPos().y.GetInt() });
-
-		owner->SetVisible(true);
-		m_spriteRenderer = owner->AddRenderObject(spriteRenderer);
+		return false;
 	}
+
+	owner->SetPos({ 448 / 2, 480 / 4 * 3 });
+	owner->SetVisible(true);
+
+	auto& sprite = owner->GetAsset()->m_sprite[0];
+
+	m_spriteRenderer->SetSprite(sprite).
+		SetLayer(2).
+		SetBlendMode(BlendMode::Blend).
+		SetPos({ owner->GetPos().x.GetInt(), owner->GetPos().y.GetInt() });
 
 	int32_t x = -48;
 	// オプションを作る
@@ -26,14 +26,6 @@ bool ScriptPlayer::OnCreate(Object* owner)
 		{
 			option->SetLocalPos({ x, 32 });
 			x *= -1;
-
-#if 0
-			auto objHandler = option->CreateChild("option");
-			if (auto option2 = owner->GetObjectByHandler(objHandler))
-			{
-				option2->SetLocalPos({ 16, 32 });
-			}
-#endif
 		}
 	}
 
@@ -92,12 +84,7 @@ bool ScriptPlayer::FixedUpdate(Object* owner)
 
 	owner->SetPos(point);
 
-	if (auto renderObject = owner->GetRenderObject(m_spriteRenderer))
-	{
-		auto spriteRenderer = static_cast<SpriteRenderer*>(renderObject);
-
-		spriteRenderer->SetPos({ point.x.GetInt(), point.y.GetInt() });
-	}
+	m_spriteRenderer->SetPos({ point.x.GetInt(), point.y.GetInt() });
 
 	return true;
 }
