@@ -4,7 +4,10 @@ bool ScriptMain::OnCreate(Object* owner)
 {
 	Logger::OutputDebug("ScriptMain::OnCreate");
 
-	if (!m_spriteRenderer.BindObject(owner))
+	if (!m_spriteRenderer.BindObject(owner) ||
+		!m_lineRenderer.BindObject(owner) ||
+		!m_circleRenderer.BindObject(owner) ||
+		!m_rectRenderer.BindObject(owner))
 	{
 		return false;
 	}
@@ -21,6 +24,17 @@ bool ScriptMain::OnCreate(Object* owner)
 			SetPos({ 448 / 2, 480 / 2 }).
 			SetScale(1.5f, 1.5f);
 	}
+
+	m_lineRenderer->PushLine({ 0, 0 }, { 32, 32 }).SetLayer(3);
+
+	Color color;
+	color.rgba8888.r = 255;
+	color.rgba8888.g = 0;
+	color.rgba8888.b = 0;
+	color.rgba8888.a = 128;
+	m_rectRenderer->SetRect({ 64, 64, 32, 32 }).SetColor(color).SetBlendMode(BlendMode::Blend);
+
+	m_circleRenderer->SetCircle({ 128, 128 }, 32);
 
 #if 0
 	// テキストを作る
