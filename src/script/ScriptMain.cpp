@@ -4,14 +4,6 @@ bool ScriptMain::OnCreate(Object* owner)
 {
 	Logger::OutputDebug("ScriptMain::OnCreate");
 
-	if (!m_spriteRenderer.BindObject(owner) ||
-		!m_lineRenderer.BindObject(owner) ||
-		!m_circleRenderer.BindObject(owner) ||
-		!m_rectRenderer.BindObject(owner))
-	{
-		return false;
-	}
-
 	owner->SetVisible(true);
 
 	// 背景を作る
@@ -36,30 +28,27 @@ bool ScriptMain::OnCreate(Object* owner)
 
 	m_circleRenderer->SetCircle({ 128, 128 }, 32);
 
-#if 0
+#if 1
 	// テキストを作る
-	if (auto textRenderer = GetRenderer()->CreateRenderObject<TextRenderer>())
 	{
 		const String text = u8"Equisetum2 TestApp\nTキーを押すとテスト画面へ入れます。";
 
-		if (auto font = Singleton<AssetManager>::GetInstance()->Load<FontManager>("mgenplus-1pp-medium.ttf?20"))
+		//if (auto font = Singleton<AssetManager>::GetInstance()->Load<FontManager>("mgenplus-1pp-medium.ttf?20"))
 		{
-			auto bf = font->MakeBitmapFont(text, Color{255,255,255,255});
-			textRenderer->SetBitmapFont(bf);
+			//auto bf = font->MakeBitmapFont(text, Color{255,255,255,255});
+			auto bf = owner->GetAsset()->m_font[0]->MakeBitmapFont(text, Color{255,255,255,255});
+			m_TextRenderer->SetBitmapFont(bf);
 
-			textRenderer->SetText(text);
-			textRenderer->SetBlendMode(BlendMode::Blend);
-			textRenderer->SetPivot({ 0.5f, 0.5f });
-			textRenderer->SetTextHAlignment(TextHAlignment::Center);
+			m_TextRenderer->SetText(text);
+			m_TextRenderer->SetBlendMode(BlendMode::Blend);
+			m_TextRenderer->SetPivot({ 0.5f, 0.5f });
+			m_TextRenderer->SetTextHAlignment(TextHAlignment::Center);
 
 			int m_x = 448 / 2;
 			int m_y = 80;
 
-			textRenderer->SetPos({ m_x, m_y });
-			textRenderer->SetLayer(10);
-
-			// レンダーキューに追加
-			owner->AddRenderObject(textRenderer);
+			m_TextRenderer->SetPos({ m_x, m_y });
+			m_TextRenderer->SetLayer(10);
 		}
 	}
 #endif

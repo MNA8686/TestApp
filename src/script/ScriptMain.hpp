@@ -16,6 +16,7 @@ private:
 	RectRendererContainer m_rectRenderer;
 	LineRendererContainer m_lineRenderer;
 	CircleRendererContainer m_circleRenderer;
+	TextRendererContainer m_TextRenderer;
 };
 
 EQ_SCRIPT_REGISTER(ScriptMain);

@@ -3,11 +3,6 @@
 
 bool ScriptOption::OnCreate(Object* owner)
 {
-	if (!m_spriteRenderer.BindObject(owner))
-	{
-		return false;
-	}
-
 	owner->SetRelativeParent(true);
 	owner->SetVisible(true);
 

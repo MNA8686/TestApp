@@ -2,11 +2,6 @@
 
 bool ScriptPlayer::OnCreate(Object* owner)
 {
-	if (!m_spriteRenderer.BindObject(owner))
-	{
-		return false;
-	}
-
 	owner->SetPos({ 448 / 2, 480 / 4 * 3 });
 	owner->SetVisible(true);
 
