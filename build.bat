@@ -1,13 +1,13 @@
 @echo off
-:開発者コマンド プロンプト for VS2013 のパスを設定
-call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\Tools\VsMSBuildCmd.bat"
+:開発者コマンド プロンプト for VS2019 のパスを設定
+call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\Tools\VsDevCmd.bat"
 :MSBuild.exeのパスを設定
 set PATH=%PATH%;C:\Windows\Microsoft.NET\Framework\v4.0.30319\
+set VCTargetsPath=C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\MSBuild\Microsoft\VC\v160\
 set DEPLOYDIR=deploy\
 set time2=%time: =0%
 set APP_NAME=TestApp_%date:~0,4%-%date:~5,2%-%date:~8,2%_%time2:~0,2%-%time2:~3,2%-%time2:~6,2%
 
-chcp 65001
 echo ==============================
 echo =       TestApp Release      =
 echo ==============================
