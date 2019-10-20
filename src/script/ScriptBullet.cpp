@@ -1,4 +1,5 @@
-﻿
+﻿#if 0
+
 #include "ScriptBullet.hpp"
 
 bool ScriptBullet::m_shotSound = false;
@@ -18,10 +19,9 @@ std::shared_ptr<SpriteRenderer> ScriptBullet::RegisterSpriteRenderer()
 	auto renderer = Script::GetRenderer();
 	auto spriteRenderer = renderer->CreateRenderObject<SpriteRenderer>();
 
-	if (auto owner = GetOwner())
-	{
-		owner->AddRenderObject(spriteRenderer);
-	}
+	auto ownerID = GetOwner();
+	auto owner = Object::GetObjectByHandler(ownerID);
+	owner->AddRenderObject(spriteRenderer);
 
 	return spriteRenderer;
 }
@@ -31,10 +31,9 @@ std::shared_ptr<LineRenderer> ScriptBullet::RegisterLineRenderer()
 	auto renderer = Script::GetRenderer();
 	auto lineRenderer = renderer->CreateRenderObject<LineRenderer>();
 
-	if (auto owner = GetOwner())
-	{
-		owner->AddRenderObject(lineRenderer);
-	}
+	auto ownerID = GetOwner();
+	auto owner = Object::GetObjectByHandler(ownerID);
+	owner->AddRenderObject(lineRenderer);
 
 	return lineRenderer;
 }
@@ -44,10 +43,9 @@ std::shared_ptr<RectRenderer> ScriptBullet::RegisterRectRenderer()
 	auto renderer = Script::GetRenderer();
 	auto castRenderer = renderer->CreateRenderObject<RectRenderer>();
 
-	if (auto owner = GetOwner())
-	{
-		owner->AddRenderObject(castRenderer);
-	}
+	auto ownerID = GetOwner();
+	auto owner = Object::GetObjectByHandler(ownerID);
+	owner->AddRenderObject(castRenderer);
 
 	return castRenderer;
 }
@@ -57,10 +55,9 @@ std::shared_ptr<CircleRenderer> ScriptBullet::RegisterCircleRenderer()
 	auto renderer = Script::GetRenderer();
 	auto circleRenderer = renderer->CreateRenderObject<CircleRenderer>();
 
-	if (auto owner = GetOwner())
-	{
-		owner->AddRenderObject(circleRenderer);
-	}
+	auto ownerID = GetOwner();
+	auto owner = Object::GetObjectByHandler(ownerID);
+	owner->AddRenderObject(circleRenderer);
 
 	return circleRenderer;
 }
@@ -70,10 +67,9 @@ std::shared_ptr<TextRenderer> ScriptBullet::RegisterTextRenderer()
 	auto renderer = Script::GetRenderer();
 	auto textRenderer = renderer->CreateRenderObject<TextRenderer>();
 
-	if (auto owner = GetOwner())
-	{
-		owner->AddRenderObject(textRenderer);
-	}
+	auto ownerID = GetOwner();
+	auto owner = Object::GetObjectByHandler(ownerID);
+	owner->AddRenderObject(textRenderer);
 
 	return textRenderer;
 }
@@ -84,11 +80,12 @@ bool ScriptBullet::OnCreate()
 
 	if (auto spriteRenderer = RegisterSpriteRenderer())
 	{
-		if (auto owner = GetOwner())
+		auto ownerID = GetOwner();
+		auto owner = Object::GetObjectByHandler(ownerID);
 		{
 			auto asset = owner->GetAsset();
 			int kind = rand() % 2;
-			m_sprite = asset.m_sprite[kind];
+			m_sprite = asset->m_sprite[kind];
 			spriteRenderer->SetSprite(m_sprite).SetLayer(1 - kind).SetBlendMode(BlendMode::Blend);
 
 			{
@@ -168,7 +165,9 @@ void ScriptBullet::SetBullet(FixedDec x, FixedDec y, int32_t angle, FixedDec spe
 	m_angle = rand() % 360;
 	m_speed = 500 + (rand() % 400);
 
-	if (auto owner = GetOwner())
+	auto ownerID = GetOwner();
+	auto owner = Object::GetObjectByHandler(ownerID);
+
 	{
 		owner->SetPos({ rand() % 640, rand() % 480 });
 		owner->SetVisible(true);
@@ -190,7 +189,9 @@ bool ScriptBullet::FixedUpdate()
 	}
 #endif
 
-	if (auto owner = GetOwner())
+	auto ownerID = GetOwner();
+	auto owner = Object::GetObjectByHandler(ownerID);
+
 	{
 		if (owner->IsVisible())
 		{
@@ -315,3 +316,4 @@ bool ScriptBullet::FixedUpdate()
 	return true;
 }
 
+#endif

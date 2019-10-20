@@ -1,8 +1,9 @@
 #if !defined(_EQSCRIPTBULLET_H_)
 #define _EQSCRIPTBULLET_H_
 
+#if 0
 #include "Script.hpp"
-#include <cereal/types/base_class.hpp>
+//#include <cereal/types/base_class.hpp>
 
 class ScriptBullet : public Script
 {
@@ -32,6 +33,7 @@ public:
 
 	static bool m_shotSound;
 
+#if 0
 	template<class Archive>
 	void serialize(Archive & archive)
 	{
@@ -43,13 +45,15 @@ public:
 		archive(CEREAL_NVP(m_lineRenderer));
 		archive(CEREAL_NVP(m_circleRenderer));
 	}
+#endif
 
 	// test
 	std::shared_ptr<Sprite> m_font;
 };
 
-#include <cereal/types/polymorphic.hpp>
-CEREAL_REGISTER_TYPE(ScriptBullet);
-CEREAL_REGISTER_POLYMORPHIC_RELATION(Script, ScriptBullet)
+//#include <cereal/types/polymorphic.hpp>
+//CEREAL_REGISTER_TYPE(ScriptBullet);
+//CEREAL_REGISTER_POLYMORPHIC_RELATION(Script, ScriptBullet)
+#endif
 
 #endif

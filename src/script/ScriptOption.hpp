@@ -2,11 +2,11 @@
 
 #include "Script.hpp"
 
-class ScriptPlayer : public ScriptBase
+class ScriptOption : public ScriptBase
 {
 public:
-	ScriptPlayer() = default;
-	~ScriptPlayer() = default;
+	ScriptOption() = default;
+	~ScriptOption() = default;
 
 	bool OnCreate(Object* owner);
 	bool FixedUpdate(Object* owner);
@@ -15,4 +15,4 @@ private:
 	SpriteRendererContainer m_spriteRenderer;
 };
 
-EQ_SCRIPT_REGISTER(ScriptPlayer);
+EQ_SCRIPT_REGISTER(ScriptOption);

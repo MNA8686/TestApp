@@ -5,6 +5,7 @@
 	{
 		"bgm" : ["ontama_rpg_kurosujinkei"],
 		"sprite": ["space"],
+		"font" : [{ "id" : "mgenplus-1pp-medium", "size" : 20 }],
 		"script" : ["ScriptMain"]
 	}
 }

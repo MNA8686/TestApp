@@ -2,12 +2,7 @@
 #include "Object.hpp"
 #include "Node.hpp"
 #include "Application.hpp"
-
-#include <cereal/cereal.hpp>
-#include <cereal/archives/json.hpp>
-
-#include <cereal/types/vector.hpp>
-#include <cereal/types/memory.hpp>
+#include <fstream>
 
 using namespace Equisetum2;
 
@@ -17,13 +12,6 @@ public:
 	TestApp() = default;
 	~TestApp() = default;
 
-	template<class Archive>
-	void serialize(Archive & archive)
-	{
-		// test
-		archive(CEREAL_NVP(m_rootObject));
-	}
-	
 	friend Singleton<TestApp>;	// シングルトンからインスタンスを作成してもらえるようにする
 
 private:
@@ -38,7 +26,7 @@ private:
 	virtual String GetApplicationName(void);
 
 	// test
-	std::shared_ptr<Object> m_rootObject;
+	//NodeHandler m_rootObject;
 	std::shared_ptr<Texture> m_targetTexture;
 	std::shared_ptr<Sprite> m_targetSprite;
 	std::shared_ptr<RenderObject> m_targetRenderObject;
@@ -56,8 +44,13 @@ String TestApp::GetApplicationName(void)
 	return "TestApp";
 }
 
+void heap_test();
+
 bool TestApp::OnCreate(void)
 {
+
+	heap_test();
+
 	Window::SetTitle(u8"App Test Program");
 	Window::SetStyle(WindowStyle::Sizeable);
 	Window::SetMinimumSize(320, 240);
@@ -69,21 +62,21 @@ bool TestApp::OnCreate(void)
 	return true;
 }
 
-extern const std::vector<stScriptTbl>& GetScriptTbl();
 bool TestApp::OnInit(void)
 {
 	auto renderer = GetRenderer();
 
 	// スクリプト初期化
-	Script::SetScriptTbl(GetScriptTbl());
-	Script::m_renderer = renderer;
+	ScriptBase::m_renderer = renderer;
 
+#if 1
 	// ルートオブジェクト作成
-	m_rootObject = Object::Create("main");
-	if (!m_rootObject)
+	auto rootObject = Object::Create("main");
+	if (rootObject.id < 0)
 	{
 		return false;
 	}
+#endif
 
 	// レンダリング用テクスチャを作成する
 	Size windowsSize = Window::Size();
@@ -112,6 +105,8 @@ bool TestApp::OnInit(void)
 		}
 	}
 
+	Node<Object>::Dump();
+	
 	return true;
 }
 
@@ -120,15 +115,41 @@ void TestApp::OnQuit(void)
 	m_targetRenderObject = nullptr;
 	m_targetSprite = nullptr;
 	m_targetTexture = nullptr;
-	m_rootObject = nullptr;
+	//m_rootObject = {};
 }
-
-//#include <iostream>
-//#include <fstream>
 
 bool TestApp::OnUpdate(void)
 {
 	static bool pause = false;
+
+#if 0
+	if (KB::KeyL.IsDown())
+	{
+		Singleton<ResourceMapper>::GetInstance()->Reset();
+
+		std::ifstream ifs(Path::GetFullPath("out.json").c_str());
+		if (ifs)
+		{
+			cereal::JSONInputArchive i_archive(ifs);
+			Singleton<ResourceMapper>::GetInstance()->load(i_archive);
+
+			Object::m_dirty = true;
+		}
+	}
+	else if (KB::KeyS.IsDown())
+	{
+		auto out = FileStream::NewFileFromPath(Path::GetFullPath("mem.bin"));
+
+		Singleton<EqHeap>::GetInstance()->Save(out, );
+
+		std::ofstream ofs(Path::GetFullPath("out.json").c_str());
+		if (ofs)
+		{
+			cereal::JSONOutputArchive o_archive(ofs);
+			Singleton<ResourceMapper>::GetInstance()->save(o_archive);
+		}
+	}
+#endif
 
 	// フルスクリーン切り替え
 	if (KB::KeyF.IsDown())
@@ -174,9 +195,9 @@ bool TestApp::OnDraw(void)
 
 		renderer->Clear({ 0, 128, 255, 0 });
 
-		if (m_rootObject)
+		if (auto root = Object::GetRoot())
 		{
-			m_rootObject->OnDraw(renderer);
+			root->OnDraw(renderer);
 		}
 
 		renderer->Render();

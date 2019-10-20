@@ -1,0 +1,9 @@
+{
+	"type" : "object",
+	"id" : "option",
+	"asset" :
+	{
+		"sprite": ["stroke"],
+		"script" : ["ScriptOption"]
+	}
+}

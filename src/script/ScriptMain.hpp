@@ -1,25 +1,22 @@
 #pragma once
 
 #include "Script.hpp"
-#include <cereal/types/base_class.hpp>
 
-class ScriptMain : public Script
+class ScriptMain : public ScriptBase
 {
 public:
 	ScriptMain() = default;
-	virtual ~ScriptMain() = default;
+	~ScriptMain() = default;
 
-	virtual bool OnCreate() override;
-	virtual bool FixedUpdate() override;
+	bool OnCreate(Object* owner);
+	bool FixedUpdate(Object* owner);
 
-	template<class Archive>
-	void serialize(Archive & archive)
-	{
-		archive(cereal::base_class<Script>(this));
-	}
+private:
+	SpriteRendererContainer m_spriteRenderer;
+	RectRendererContainer m_rectRenderer;
+	LineRendererContainer m_lineRenderer;
+	CircleRendererContainer m_circleRenderer;
+	TextRendererContainer m_TextRenderer;
 };
 
-#include <cereal/types/polymorphic.hpp>
-CEREAL_REGISTER_TYPE(ScriptMain);
-CEREAL_REGISTER_POLYMORPHIC_RELATION(Script, ScriptMain)
-
+EQ_SCRIPT_REGISTER(ScriptMain);
