@@ -1,5 +1,7 @@
 ﻿#include "ScriptMain.hpp"
 
+EQ_SCRIPT_REGISTER(ScriptMain);
+
 bool ScriptMain::OnCreate(Object* owner)
 {
 	Logger::OutputDebug("ScriptMain::OnCreate");

@@ -1,5 +1,7 @@
 ﻿#include "ScriptPlayer.hpp"
 
+EQ_SCRIPT_REGISTER(ScriptPlayer);
+
 bool ScriptPlayer::OnCreate(Object* owner)
 {
 	owner->SetPos({ 448 / 2, 480 / 4 * 3 });

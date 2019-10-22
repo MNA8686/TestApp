@@ -19,4 +19,3 @@ private:
 	TextRendererContainer m_TextRenderer;
 };
 
-EQ_SCRIPT_REGISTER(ScriptMain);

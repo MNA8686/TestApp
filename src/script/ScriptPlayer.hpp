@@ -15,4 +15,3 @@ private:
 	SpriteRendererContainer m_spriteRenderer;
 };
 
-EQ_SCRIPT_REGISTER(ScriptPlayer);

@@ -1,6 +1,8 @@
 ﻿#include "ScriptOption.hpp"
 #include "graphic/RenderObject.hpp"
 
+EQ_SCRIPT_REGISTER(ScriptOption);
+
 bool ScriptOption::OnCreate(Object* owner)
 {
 	owner->SetRelativeParent(true);
