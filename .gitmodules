@@ -1,0 +1,3 @@
+[submodule "submodule/equisetum2"]
+	path = submodule/equisetum2
+	url = https://github.com/MNA8686/equisetum2
