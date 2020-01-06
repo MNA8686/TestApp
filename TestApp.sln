@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29306.81
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestApp", "TestApp.vcxproj", "{77391B3D-1B00-4642-86B2-D41F7977CC5A}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -9,9 +9,9 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestApp", "TestApp.vcxproj"
 		{D118A2E3-6C1A-479B-A6CC-76806DDC4C7E} = {D118A2E3-6C1A-479B-A6CC-76806DDC4C7E}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libEquisetum2", "..\equisetum2\projects\VisualC\libEquisetum2.vcxproj", "{641DEE76-B658-4449-A6A2-A17BDFBB0F8E}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libEquisetum2", "submodule\equisetum2\projects\VisualC\libEquisetum2.vcxproj", "{641DEE76-B658-4449-A6A2-A17BDFBB0F8E}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "gameSystem", "..\equisetum2\gameSystem\project\VisualC\gameSystem.vcxproj", "{D118A2E3-6C1A-479B-A6CC-76806DDC4C7E}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "gameSystem", "submodule\equisetum2\gameSystem\project\VisualC\gameSystem.vcxproj", "{D118A2E3-6C1A-479B-A6CC-76806DDC4C7E}"
 	ProjectSection(ProjectDependencies) = postProject
 		{641DEE76-B658-4449-A6A2-A17BDFBB0F8E} = {641DEE76-B658-4449-A6A2-A17BDFBB0F8E}
 	EndProjectSection
@@ -37,13 +37,18 @@ Global
 		{641DEE76-B658-4449-A6A2-A17BDFBB0F8E}.Release|x86.ActiveCfg = Release|Win32
 		{641DEE76-B658-4449-A6A2-A17BDFBB0F8E}.Release|x86.Build.0 = Release|Win32
 		{D118A2E3-6C1A-479B-A6CC-76806DDC4C7E}.Debug|x64.ActiveCfg = Debug|x64
+		{D118A2E3-6C1A-479B-A6CC-76806DDC4C7E}.Debug|x64.Build.0 = Debug|x64
 		{D118A2E3-6C1A-479B-A6CC-76806DDC4C7E}.Debug|x86.ActiveCfg = Debug|Win32
 		{D118A2E3-6C1A-479B-A6CC-76806DDC4C7E}.Debug|x86.Build.0 = Debug|Win32
 		{D118A2E3-6C1A-479B-A6CC-76806DDC4C7E}.Release|x64.ActiveCfg = Release|x64
+		{D118A2E3-6C1A-479B-A6CC-76806DDC4C7E}.Release|x64.Build.0 = Release|x64
 		{D118A2E3-6C1A-479B-A6CC-76806DDC4C7E}.Release|x86.ActiveCfg = Release|Win32
 		{D118A2E3-6C1A-479B-A6CC-76806DDC4C7E}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A5CCF29B-5611-4D8B-AC58-6C18BA94694A}
 	EndGlobalSection
 EndGlobal

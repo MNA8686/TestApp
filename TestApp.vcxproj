@@ -90,7 +90,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions);_ITERATOR_DEBUG_LEVEL=0</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>../Equisetum2/include;../Equisetum2/external/dep/win32/cereal/include;../Equisetum2/gameSystem/include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>submodule/Equisetum2/include;submodule/Equisetum2/external/dep/win32/cereal/include;submodule/Equisetum2/gameSystem/include</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>stdafx.h</ForcedIncludeFiles>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <MinimalRebuild>false</MinimalRebuild>
@@ -100,11 +100,11 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies);libEquisetum2_d.lib;gameSystem_d.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>../Equisetum2/lib/win32/lib</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>submodule/Equisetum2/lib/win32/lib</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
-      <Command>copy "..\Equisetum2\lib\win32\dll\*" ".\test\"
-copy "..\Equisetum2\lib\win32\system.eq2" ".\test\"
+      <Command>copy "submodule\Equisetum2\lib\win32\dll\*" ".\test\"
+copy "submodule\Equisetum2\lib\win32\system.eq2" ".\test\"
 xcopy ".\resources\*" ".\test\" /S/E/i/Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -129,7 +129,7 @@ xcopy ".\resources\*" ".\test\" /S/E/i/Y</Command>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>../Equisetum2/include;../Equisetum2/external/dep/win32/cereal/include;../Equisetum2/gameSystem/include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>submodule/Equisetum2/include;submodule/Equisetum2/external/dep/win32/cereal/include;submodule/Equisetum2/gameSystem/include</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>stdafx.h</ForcedIncludeFiles>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <ConformanceMode>true</ConformanceMode>
@@ -139,12 +139,12 @@ xcopy ".\resources\*" ".\test\" /S/E/i/Y</Command>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>../Equisetum2/lib/win32/lib</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>submodule/Equisetum2/lib/win32/lib</AdditionalLibraryDirectories>
       <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies);libEquisetum2.lib;gameSystem.lib</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>copy "..\Equisetum2\lib\win32\dll\*" ".\test\"
-copy "..\Equisetum2\lib\win32\system.eq2" ".\test\"
+      <Command>copy "submodule\Equisetum2\lib\win32\dll\*" ".\test\"
+copy "submodule\Equisetum2\lib\win32\system.eq2" ".\test\"
 xcopy ".\resources\*" ".\test\" /S/E/i/Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
