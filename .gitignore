@@ -2,6 +2,7 @@
 /deploy
 /ipch
 /Release
+/x64
 /test
 /TestApp.VC.db
 /.vs
